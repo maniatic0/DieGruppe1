@@ -2,13 +2,13 @@
 using System.Collections;
 
 public class movimientoBarra : MonoBehaviour {
-    public int maxY;
-    public int minY;
+    public float maxY;
+    public float minY;
     public float maxVel;
     public float force;
     public string boton;
-    public bool botonUpPressed = false;
-    public bool botonDownPressed = false;
+    private bool botonUpPressed = false;
+    private bool botonDownPressed = false;
     private int moving = 0;
     private Rigidbody2D body;
     // Use this for initialization
@@ -24,7 +24,7 @@ public class movimientoBarra : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (botonUpPressed && !botonDownPressed && Mathf.Abs(body.velocity.y) <= maxVel)
+        if (botonUpPressed && !botonDownPressed && Mathf.Abs(body.velocity.y) <= maxVel && transform.position.y < maxY)
         {
             if (moving != 1)
             {
@@ -33,7 +33,7 @@ public class movimientoBarra : MonoBehaviour {
             }
             body.AddForce(new Vector2(0, force));
         }
-        else if (!botonUpPressed && botonDownPressed && Mathf.Abs(body.velocity.y) <= maxVel)
+        else if (!botonUpPressed && botonDownPressed && Mathf.Abs(body.velocity.y) <= maxVel && transform.position.y > minY)
         {
             if (moving != -1)
             {
